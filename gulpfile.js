@@ -25,9 +25,7 @@ gulp.task('styles',function() {
     .pipe(gulp.dest('build/css/fonts'))
 
   // Compiles CSS
-  gulp.src('css/style.styl')
-    .pipe(stylus())
-    .pipe(autoprefixer())
+  gulp.src('css/style.css')
     .pipe(gulp.dest('./build/css/'))
     .pipe(reload({stream:true}))
 });
@@ -102,11 +100,11 @@ function buildScript(file, watch) {
 }
 
 gulp.task('scripts', function() {
-  return buildScript('main.js', false); // this will run once because we set watch to false
+  return buildScript('travel-app.js', false); // this will run once because we set watch to false
 });
 
 // run 'scripts' task first, then watch for future changes
-gulp.task('default', ['scripts','browser-sync'], function() {
+gulp.task('default', ['styles', 'scripts','browser-sync'], function() {
   gulp.watch('css/**/*', ['styles']); // gulp watch for stylus changes
-  return buildScript('main.js', true); // browserify watch for JS changes
+  return buildScript('travel-app.js', true); // browserify watch for JS changes
 });
