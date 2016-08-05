@@ -1,6 +1,17 @@
+/*
+  Progress colors
+  Green -> rgb(92, 229, 0);
+  Dark Green -> rgb(67, 167, 0);
+  Gray -> rgb(213, 213, 216);
+  Dark Gray -> rgb(124, 135, 142);
+  Teal -> rgb(0, 171, 142);
+  Purple -> rgb(127, 48, 149);
+  Dark Purple -> rgb(91, 32, 99);
+*/
+
 body {
   font-family: "Roboto", sans-serif;
-  background-color: rgb(54, 23, 94);
+  background-color: rgb(213, 213, 216);
 }
 
 .travelArea {
@@ -17,7 +28,7 @@ body {
   color: #FFFFFF;
   height: 50px;
   padding: 0 45px 0 45px;
-  background-color: rgb(123, 82, 171);
+  background-color: rgb(127, 48, 149);
 }
 
 .travelHeader h1 {
@@ -46,13 +57,17 @@ body {
 }
 
 .switch {
-  background-color: rgb(123, 82, 171);
+  background-color: rgb(127, 48, 149);
   width: 80%;
   display: inline-block;
   height: 40px;
   padding: 5px;
   position: relative;
   zoom: 1;
+}
+
+.switch:hover {
+  background-color: rgb(91, 32, 99);
 }
 
 .switch:before, .switch:after {
@@ -77,7 +92,7 @@ body {
   display: none;
 }
 .switch input[type="radio"]:checked + label {
-  color: rgb(123, 82, 171);
+  color: rgb(127, 48, 149);
   font-weight: bold;
 }
 .switch span {
@@ -102,7 +117,7 @@ body {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: rgb(123, 82, 171);
+  background: rgb(127, 48, 149);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -113,7 +128,7 @@ body {
   cursor: pointer;
 }
 .travelArea button:hover,.form button:active,.form button:focus {
-  background: rgb(130, 90, 180);
+  background: rgb(91, 32, 99);
 }
 
 .dateInputArea {
