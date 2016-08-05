@@ -20,8 +20,15 @@ const Travel = React.createClass({
     }
   },
   submitTravel: function(event) {
-    console.log("add item");
-    console.log(event.target);
+    event.preventDefault();
+    console.log("Adding travel item");
+    var travelItem = {
+      type: this.state.travelReason,
+      startDate: this.refs.startDate.value,
+      endDate: this.refs.endDate.value,
+      companyName: this.refs.companyName.value
+    }
+    this.props.addTravelItem(travelItem);
   },
   // Design for the form inspired by: http://codepen.io/colorlib/pen/rxddKy
   // Design for the switch inspired by: http://codepen.io/kylephillips/pen/MYwXqV
@@ -51,12 +58,12 @@ const Travel = React.createClass({
           </div>
           {/* This is the personal-related input area */}
           <div className="dateInputArea">
-            <input id="startDate" type="text" onFocus={ this.changeType } onBlur={ this.changeType } placeholder="Start Date" />
-            <input id="endDate" type="text" onFocus={ this.changeType } onBlur={ this.changeType } placeholder="End Date" />
+            <input ref="startDate" id="startDate" type="text" onFocus={ this.changeType } onBlur={ this.changeType } placeholder="Start Date" />
+            <input ref="endDate" id="endDate" type="text" onFocus={ this.changeType } onBlur={ this.changeType } placeholder="End Date" />
           </div>
           {/* This is the work-related input area */}
           <div className={ (this.state.travelReason != "work") ? "hidden" : null }>
-            <input id="companyInput" type="text" placeholder="Company Name"/>
+            <input ref="companyName" id="companyInput" type="text" placeholder="Company Name"/>
           </div>
           <button className="submitTravelButton" onClick={ this.submitTravel }>Add Travel</button>
         </div>
