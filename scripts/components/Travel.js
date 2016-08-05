@@ -20,15 +20,15 @@ const Travel = React.createClass({
     }
   },
   submitTravel: function(event) {
-    event.preventDefault();
     console.log("Adding travel item");
+    event.preventDefault();
     var travelItem = {
       type: this.state.travelReason,
       startDate: this.refs.startDate.value,
       endDate: this.refs.endDate.value,
       companyName: this.refs.companyName.value
     }
-    this.props.addTravelItem(travelItem);
+    //this.props.addTravelItem(travelItem);
   },
   // Design for the form inspired by: http://codepen.io/colorlib/pen/rxddKy
   // Design for the switch inspired by: http://codepen.io/kylephillips/pen/MYwXqV
@@ -38,7 +38,7 @@ const Travel = React.createClass({
         <div className="travelHeader">
           <h1>Add Travel</h1>
         </div>
-        <div className="travelContentArea">
+        <form className="travelContentArea" ref="travelForm" onSubmit={ this.submitTravel }>
           <div className="radioButtonArea">
             <div className="switch">
               <div className="travelRadioButton">
@@ -65,8 +65,8 @@ const Travel = React.createClass({
           <div className={ (this.state.travelReason != "work") ? "hidden" : null }>
             <input ref="companyName" id="companyInput" type="text" placeholder="Company Name"/>
           </div>
-          <button className="submitTravelButton" onClick={ this.submitTravel }>Add Travel</button>
-        </div>
+          <button className="submitTravelButton">Add Travel</button>
+        </form>
       </div>
     );
   }

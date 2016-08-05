@@ -93,6 +93,7 @@ body {
 }
 .switch input[type="radio"]:checked + label {
   color: rgb(127, 48, 149);
+  text-decoration: underline;
   font-weight: bold;
 }
 .switch span {
