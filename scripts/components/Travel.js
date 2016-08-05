@@ -7,10 +7,22 @@ const Travel = React.createClass({
   },
   reasonChange: function(event) {
     this.setState({ travelReason: event.target.value });
+
+
+    // $('.switch label').on('click', function(){
+    //   var indicator = $(this).parent('.switch').find('span');
+    //   if ( $(this).hasClass('right') ){
+    // 		$(indicator).addClass('right');
+    //   } else {
+    //     $(indicator).removeClass('right');
+    //   }
+    // });
+
   },
   changeType: function(event) {
     var currentType = event.target.type;
     var currentTarget = event.target;
+
     if(currentType === "text") {
       currentTarget.type = "date";
     }
@@ -26,17 +38,20 @@ const Travel = React.createClass({
     return(
       <div className="travelArea">
         <div className="radioButtonArea">
-          <div className="travelRadioButton">
-            <input type="radio" name="travelType" value="work"
-              checked={ this.state.travelReason === "work" }
-              onChange={ this.reasonChange } />
-            Work
-          </div>
-          <div className="travelRadioButton">
-            <input type="radio" name="travelType" value="personal"
-              checked={ this.state.travelReason === "personal" }
-              onChange={ this.reasonChange } />
-            Personal
+          <div className="switch">
+            <div className="travelRadioButton">
+              <input id="workOption" type="radio" name="travelType" value="work"
+                checked={ this.state.travelReason === "work" }
+                onChange={ this.reasonChange } />
+              <label htmlFor="workOption">Work</label>
+            </div>
+            <div className="travelRadioButton">
+              <input id="personalOption" type="radio" name="travelType" value="personal"
+                checked={ this.state.travelReason === "personal" }
+                onChange={ this.reasonChange } />
+              <label htmlFor="personalOption">Personal</label>
+            </div>
+            <span className={ (this.state.travelReason != "work") ? "right" : null } aria-hidden="true"></span>
           </div>
         </div>
         {/* This is the personal-related input area */}
