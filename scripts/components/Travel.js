@@ -6,6 +6,7 @@ const Travel = React.createClass({
     return { travelReason: "work" }
   },
   reasonChange: function(event) {
+    console.log("change");
     this.setState({ travelReason: event.target.value });
   },
   changeType: function(event) {
@@ -28,6 +29,11 @@ const Travel = React.createClass({
       endDate: this.refs.endDate.value,
       companyName: this.refs.companyName.value
     }
+    // form.reset() clears the radio button, so let's manually clear things
+    this.refs.startDate.value = "";
+    this.refs.endDate.value = "";
+    this.refs.companyName.value = "";
+    
     //this.props.addTravelItem(travelItem);
   },
   // Design for the form inspired by: http://codepen.io/colorlib/pen/rxddKy
