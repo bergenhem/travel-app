@@ -1,6 +1,6 @@
 body {
   font-family: "Roboto", sans-serif;
-  background-color: rgb(37, 6, 76);
+  background-color: rgb(54, 23, 94);
 }
 
 .travelArea {
@@ -9,9 +9,25 @@ body {
   background: #FFFFFF;
   max-width: 500px;
   margin: 0 auto 100px;
-  padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.travelHeader {
+  color: #FFFFFF;
+  height: 50px;
+  padding: 0 45px 0 45px;
+  background-color: rgb(123, 82, 171);
+}
+
+.travelHeader h1 {
+  font-size: 1.5em;
+  padding: 10px 0 10px 0;
+  text-align: left;
+}
+
+.travelContentArea {
+  padding: 20px 45px 45px 45px;
 }
 
 .travelArea input {
@@ -19,21 +35,20 @@ body {
   background: #f2f2f2;
   width: 100%;
   border: 0;
-  margin: 0 0 15px;
+  margin: 0 0 20px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
 }
 
 .radioButtonArea {
-
+  padding: 0 0 20px 0;
 }
 
 .switch {
-  background-color: #1bbc9b;
+  background-color: rgb(123, 82, 171);
   width: 80%;
   display: inline-block;
-  border-radius: 8px;
   height: 40px;
   padding: 5px;
   position: relative;
@@ -56,13 +71,13 @@ body {
   z-index: 2;
   line-height: 40px;
   cursor: pointer;
-  color: #117964;
+  color: #FFFFFF;
 }
 .switch input[type="radio"] {
   display: none;
 }
 .switch input[type="radio"]:checked + label {
-  color: #141241;
+  color: rgb(123, 82, 171);
   font-weight: bold;
 }
 .switch span {
@@ -73,20 +88,32 @@ body {
   width: 50%;
   height: 100%;
   display: block;
-  border-radius: 5px 0 0 5px;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
 }
 .switch span.right {
   left: 50%;
-  border-radius: 0 5px 5px 0;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
 }
 
-.travelRadioButton {
-
+.travelArea button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: rgb(123, 82, 171);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.travelArea button:hover,.form button:active,.form button:focus {
+  background: rgb(130, 90, 180);
 }
 
 .dateInputArea {
