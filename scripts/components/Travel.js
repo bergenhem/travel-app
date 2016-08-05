@@ -8,6 +8,10 @@ const Travel = React.createClass({
   reasonChange: function(event) {
     this.setState({ travelReason: event.target.value });
   },
+  submitTravel: function(event) {
+    console.log("add item");
+    console.log(event.target);
+  },
   render() {
     return(
       <div>
@@ -23,6 +27,7 @@ const Travel = React.createClass({
             onChange={ this.reasonChange } />
           Personal
         </div>
+        <button className="submitTravelButton" onClick={ this.submitTravel }>Add Travel</button>
       </div>
     );
   }
