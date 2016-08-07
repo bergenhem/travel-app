@@ -33,8 +33,8 @@ const Travel = React.createClass({
     this.refs.startDate.value = "";
     this.refs.endDate.value = "";
     this.refs.companyName.value = "";
-    
-    //this.props.addTravelItem(travelItem);
+
+    this.props.addTravelItem(travelItem);
   },
   // Design for the form inspired by: http://codepen.io/colorlib/pen/rxddKy
   // Design for the switch inspired by: http://codepen.io/kylephillips/pen/MYwXqV

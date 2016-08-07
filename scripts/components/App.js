@@ -13,9 +13,13 @@ const App = React.createClass({
     };
   },
   componentDidMount: function() {
-    base.syncState("travelItems", {
+    base.syncState("/travelItems", {
       context: this,
-      state: "travelItems"
+      state: "travelItems",
+      then: function(e) {
+        console.log("then");
+        console.log(e);
+      }
     });
     var localStorageRef = localStorage.getItem("travelItems");
     if(localStorageRef) {
