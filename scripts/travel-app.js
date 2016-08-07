@@ -8,6 +8,7 @@ import App from "./components/App";
 import Login from "./components/Login";
 import Recovery from "./components/Recovery";
 import Register from "./components/Register";
+import NotFound from "./components/NotFound";
 
 // Check whether or not a user is logged in to redirect to "/login" if needed
 function checkLogin(nextState, replace) {
@@ -33,6 +34,7 @@ var routes = (
     <Route path="/login" component={ Login } />
     <Route path="/recovery" component={ Recovery } />
     <Route path="/register" component={ Register } />
+    <Route path="*" component={ NotFound } />
   </Router>
 );
 
