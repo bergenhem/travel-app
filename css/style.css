@@ -1,0 +1,145 @@
+/*
+  Progress colors
+  Green -> rgb(92, 229, 0);
+  Dark Green -> rgb(67, 167, 0);
+  Gray -> rgb(213, 213, 216);
+  Dark Gray -> rgb(124, 135, 142);
+  Teal -> rgb(0, 171, 142);
+  Purple -> rgb(127, 48, 149);
+  Dark Purple -> rgb(91, 32, 99);
+*/
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: rgb(213, 213, 216);
+}
+
+.travelArea {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 500px;
+  margin: 0 auto 100px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.travelHeader {
+  color: #FFFFFF;
+  height: 50px;
+  padding: 0 45px 0 45px;
+  background-color: rgb(127, 48, 149);
+}
+
+.travelHeader h1 {
+  font-size: 1.5em;
+  padding: 10px 0 10px 0;
+  text-align: left;
+}
+
+.travelContentArea {
+  padding: 20px 45px 45px 45px;
+}
+
+.travelArea input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 20px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.radioButtonArea {
+  padding: 0 0 20px 0;
+}
+
+.switch {
+  background-color: rgb(127, 48, 149);
+  width: 80%;
+  display: inline-block;
+  height: 40px;
+  padding: 5px;
+  position: relative;
+  zoom: 1;
+}
+
+.switch:hover {
+  background-color: rgb(91, 32, 99);
+}
+
+.switch:before, .switch:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.switch:after {
+  clear: both;
+}
+.switch label {
+  float: left;
+  width: 50%;
+  position: relative;
+  z-index: 2;
+  line-height: 40px;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+.switch input[type="radio"] {
+  display: none;
+}
+.switch input[type="radio"]:checked + label {
+  color: rgb(127, 48, 149);
+  text-decoration: underline;
+  font-weight: bold;
+}
+.switch span {
+  position: relative;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  display: block;
+  background-color: #FFFFFF;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+.switch span.right {
+  left: 50%;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+.travelArea button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: rgb(127, 48, 149);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.travelArea button:hover,.travelArea button:active {
+  background: rgb(91, 32, 99);
+}
+
+.dateInputArea {
+
+}
+
+.submitTravelButton {
+
+}
+
+.hidden {
+  display: none;
+}
