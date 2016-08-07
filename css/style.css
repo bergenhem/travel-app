@@ -14,7 +14,7 @@ body {
   background-color: rgb(213, 213, 216);
 }
 
-.travelArea {
+.overallArea {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
@@ -24,24 +24,24 @@ body {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.travelHeader {
+.overallHeader {
   color: #FFFFFF;
   height: 50px;
   padding: 0 45px 0 45px;
   background-color: rgb(127, 48, 149);
 }
 
-.travelHeader h1 {
+.overallHeader h1 {
   font-size: 1.5em;
   padding: 10px 0 10px 0;
   text-align: left;
 }
 
-.travelContentArea {
+.overallContentArea {
   padding: 20px 45px 45px 45px;
 }
 
-.travelArea input {
+.overallArea input {
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -114,7 +114,7 @@ body {
   transition: all 200ms ease;
 }
 
-.travelArea button {
+.overallArea button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -128,16 +128,8 @@ body {
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.travelArea button:hover,.travelArea button:active {
+.overallArea button:hover,.overallArea button:active {
   background: rgb(91, 32, 99);
-}
-
-.dateInputArea {
-
-}
-
-.submitTravelButton {
-
 }
 
 .hidden {
