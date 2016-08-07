@@ -132,6 +132,35 @@ body {
   background: rgb(91, 32, 99);
 }
 
+.helperLinks {
+  padding-top: 10px;
+}
+
+.helperLinks a, .helperLinks a:link, .helperLinks a:visited {
+  border: none;
+  text-decoration: inherit;
+  font-style: inherit;
+  font-size: 0.8em;
+  color: rgb(124, 135, 142);
+}
+
+.helperLinks a:hover {
+ text-decoration: none;
+ color: rgb(127, 48, 149);
+}
+
+.helperLinks span {
+  width: 50%;
+  display: inline-block;
+}
+
+.helperLinks span.align-left {
+  text-align: left;
+}
+.helperLinks span.align-right {
+  text-align: right;
+}
+
 .hidden {
   display: none;
 }

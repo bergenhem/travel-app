@@ -16,6 +16,14 @@ const Login = React.createClass({
           <input type="text" placeholder="Username" />
           <input type="password" placeholder="Password" />
           <button>Log in</button>
+          <div className="helperLinks">
+            <span className="alignLeft">
+              <a href="/recovery">Forgot your password?</a>
+            </span>
+            <span className="alignRight">
+              <a href="/register">Register</a>
+            </span>
+          </div>
         </form>
       </div>
     )
