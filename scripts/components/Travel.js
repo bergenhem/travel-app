@@ -21,7 +21,7 @@ const Travel = React.createClass({
     }
   },
   submitTravel: function(event) {
-    console.log("Adding travel item");
+    console.log("Adding travel item...");
     event.preventDefault();
     var travelItem = {
       type: this.state.travelReason,

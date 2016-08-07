@@ -3,7 +3,6 @@ import { render } from "react-dom";
 
 import Rebase from "re-base";
 import Firebase from "firebase";
-//var base = Rebase.createClass("https://travel-app-1e574.firebaseio.com/");
 
 var config = {
   apiKey: "3RjI1jSJ9KXAcNP26NB4i6xgjFcXU9SjoqNHIWcC",
@@ -33,12 +32,26 @@ const App = React.createClass({
     localStorage.setItem("travelItems", JSON.stringify(nextState.travelItems));
   },
   addTravelItem: function(travelItem) {
+    // Use firebase to add an unique key
     var newPostKey = database.ref("/travelItems").push().key;
     var newItem = {};
+
+    // Update the temporary item we added to Firebase
     newItem["/travelItems/" + newPostKey] = travelItem;
-    var test = database.ref().update(newItem);
+    database.ref().update(newItem, this.updatePromise);
+
+    // Use the above key to create unique entries in our state
     this.state.travelItems["travel-item-" + newPostKey] = travelItem;
     this.setState({ travelItems: this.state.travelItems });
+  },
+  updatePromise: function(error) {
+    if(error) {
+      console.log("Error when updating");
+      console.log(error);
+    }
+    else {
+      console.log("Successfully added item");
+    }
   },
   render() {
     return (
