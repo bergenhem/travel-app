@@ -25,7 +25,7 @@ gulp.task('styles',function() {
     .pipe(gulp.dest('build/css/fonts'))
 
   // Compiles CSS
-  gulp.src('css/style.css')
+  gulp.src('css/*.css')
     .pipe(gulp.dest('./build/css/'))
     .pipe(reload({stream:true}))
 });

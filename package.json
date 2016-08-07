@@ -35,6 +35,8 @@
     "firebase": "^3.2.1",
     "re-base": "^1.5.1",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react-addons-css-transition-group": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-notifications": "^1.2.0"
   }
 }
