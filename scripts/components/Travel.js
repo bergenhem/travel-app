@@ -6,7 +6,6 @@ const Travel = React.createClass({
     return { travelReason: "work" }
   },
   reasonChange: function(event) {
-    console.log("change");
     this.setState({ travelReason: event.target.value });
   },
   changeType: function(event) {
