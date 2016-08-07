@@ -22,10 +22,6 @@ const App = React.createClass({
     };
   },
   componentDidMount: function() {
-    // base.syncState("/travelItems", {
-    //   context: this,
-    //   state: "travelItems"
-    // });
     var localStorageRef = localStorage.getItem("travelItems");
     if(localStorageRef) {
       this.setState({
@@ -34,27 +30,15 @@ const App = React.createClass({
     }
   },
   componentWillUpdate: function(nextProps, nextState) {
-    localStorage.setItem("travelItems", JSON.stringify(nextState));
+    localStorage.setItem("travelItems", JSON.stringify(nextState.travelItems));
   },
   addTravelItem: function(travelItem) {
     var newPostKey = database.ref("/travelItems").push().key;
     var newItem = {};
     newItem["/travelItems/" + newPostKey] = travelItem;
     var test = database.ref().update(newItem);
-    console.log("addTravelItem");
-    console.log(test);
-//     // Get a key for a new Post.
-// var newPostKey = firebase.database().ref().child('posts').push().key;
-//
-// // Write the new post's data simultaneously in the posts list and the user's post list.
-// var updates = {};
-// updates['/posts/' + newPostKey] = postData;
-// updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-//
-// return firebase.database().ref().update(updates);
-    //var timestamp = (new Date()).getTime();
-    //this.state.travelItems["travel-item-" + timestamp] = travelItem;
-    //this.setState({ travelItems : this.state.travelItems });
+    this.state.travelItems["travel-item-" + newPostKey] = travelItem;
+    this.setState({ travelItems: this.state.travelItems });
   },
   render() {
     return (
