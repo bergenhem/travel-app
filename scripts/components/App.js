@@ -21,15 +21,17 @@ const App = React.createClass({
     };
   },
   componentDidMount: function() {
-    var localStorageRef = localStorage.getItem("travelItems");
-    if(localStorageRef) {
-      this.setState({
-        travelItems: JSON.parse(localStorageRef)
+    var that = this;
+    database.ref("/travelItems").once("value", function(dataSnapShot) {
+      console.log("Read data at load");
+      var loadedTravelItems = dataSnapShot.val();
+      that.setState({
+        travelItems: loadedTravelItems
       });
-    }
-  },
-  componentWillUpdate: function(nextProps, nextState) {
-    localStorage.setItem("travelItems", JSON.stringify(nextState.travelItems));
+    }, function(err) {
+      console.log("Error retrieving data at load");
+      console.log(err);
+    });
   },
   addTravelItem: function(travelItem) {
     // Use firebase to add an unique key
@@ -41,12 +43,12 @@ const App = React.createClass({
     database.ref().update(newItem, this.updatePromise);
 
     // Use the above key to create unique entries in our state
-    this.state.travelItems["travel-item-" + newPostKey] = travelItem;
+    this.state.travelItems[newPostKey] = travelItem;
     this.setState({ travelItems: this.state.travelItems });
   },
   updatePromise: function(error) {
     if(error) {
-      console.log("Error when updating");
+      console.log("Error when updating, saving to localStorage");
       console.log(error);
     }
     else {
