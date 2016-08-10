@@ -4,6 +4,9 @@ import { render } from "react-dom";
 const Register = React.createClass({
   register: function(event) {
     event.preventDefault();
+
+    this.props.registerUser(this.refs.emailInput.value, this.refs.password.value);
+
     this.refs.registerForm.reset();
   },
   render() {

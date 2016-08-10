@@ -52,6 +52,31 @@ const App = React.createClass({
           break;
       }
   },
+  registerUser: function(email, password) {
+    var that = this;
+    console.log("Register User");
+    // database.createUser({
+    //   email: email,
+    //   password: password
+    // }, function(error, userData) {
+    //   if(error) {
+    //     switch(error.code) {
+    //       case "EMAIL_TAKEN":
+    //         that.createNotification("error", "The email provided is already in use.", "Error Creating User", 3000);
+    //         break;
+    //       case "INVALID_EMAIL":
+    //         that.createNotification("error", "The specified email is not a valid email.", "Error Creating User", 3000);
+    //         break;
+    //       default:
+    //         that.createNotification("error", "An generic error occured when creating a user.", "Error Creating User", 3000);
+    //     }
+    //   }
+    //   else {
+    //     console.log("Added user account with uid: ", userData.uid);
+    //     console.log(userData);
+    //   }
+    // });
+  },
   addTravelItem: function(travelItem) {
     // Use firebase to add an unique key
     var newPostKey = database.ref("/travelItems").push().key;
@@ -76,10 +101,33 @@ const App = React.createClass({
       this.createNotification("success", "Item was added!", "Success!", 2000);
     }
   },
+  // <Travel addTravelItem={ this.addTravelItem } registerUser={ this.registerUser } />
   render() {
+    var that = this;
+    var childrenWithProps = React.Children.map(this.props.children, function(child) {
+      var pathName = child.props.location.pathname;
+      var childWithCorrectProps = {};
+      switch(pathName) {
+        case "/login":
+          break;
+        case "/register":
+          childWithCorrectProps = React.cloneElement(child, {
+            registerUser: that.registerUser
+          });
+          break;
+        case "/recovery":
+          asd
+          break;
+        default:
+          childWithCorrectProps = React.cloneElement(child, {
+            addTravelItem: that.addTravelItem
+          });
+      }
+      return childWithCorrectProps
+    });
     return (
       <div>
-        <Travel addTravelItem={ this.addTravelItem } />
+        { childrenWithProps }
         <NotificationContainer />
       </div>
     );
