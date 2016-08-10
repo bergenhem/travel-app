@@ -101,9 +101,13 @@ const App = React.createClass({
       this.createNotification("success", "Item was added!", "Success!", 2000);
     }
   },
-  // <Travel addTravelItem={ this.addTravelItem } registerUser={ this.registerUser } />
   render() {
     var that = this;
+    /*
+      The following allows us to check the child view that needs to be rendered and then applies
+      the proper props to that child. This is to prevent registration-specific functionality to be
+      available in the area where we add travel and vice versa etc.
+    */
     var childrenWithProps = React.Children.map(this.props.children, function(child) {
       var pathName = child.props.location.pathname;
       var childWithCorrectProps = {};
@@ -116,7 +120,6 @@ const App = React.createClass({
           });
           break;
         case "/recovery":
-          asd
           break;
         default:
           childWithCorrectProps = React.cloneElement(child, {
