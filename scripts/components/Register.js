@@ -5,7 +5,10 @@ const Register = React.createClass({
   register: function(event) {
     event.preventDefault();
 
-    this.props.registerUser(this.refs.emailInput.value, this.refs.password.value);
+    this.props.registerUser(this.refs.emailInput.value,
+                            this.refs.password.value,
+                            this.refs.firstName.value,
+                            this.refs.lastName.value);
 
     this.refs.registerForm.reset();
   },

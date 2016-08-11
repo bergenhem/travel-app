@@ -22,17 +22,15 @@ const App = React.createClass({
   componentDidMount: function() {
     var that = this;
     database.ref("/travelItems").once("value", function(dataSnapShot) {
-      console.log("Read data at load");
       var loadedTravelItems = dataSnapShot.val();
       that.setState({
         travelItems: loadedTravelItems
       });
     }, function(error) {
-      console.log("Error retrieving data at load");
-      console.log(error);
       this.createNotification("error", error, "Error", 3000);
     });
   },
+  // Abstraction to create popup notifications of various kinds
   createNotification: function(type, message, title, timeout) {
       switch(type) {
         case "info":
@@ -49,12 +47,18 @@ const App = React.createClass({
           break;
       }
   },
-  registerUser: function(email, password) {
+  registerUser: function(email, password, firstName, lastName) {
     var that = this;
-    console.log("Register User");
-    Firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      console.log("Error when creating user");
-      console.log(error); //error.code error.message
+    Firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(function(user) { // successfully created a user, now let's update the "user" data item
+        var uid = user.uid;
+        database.ref("/user/" + uid).set({
+          uid: uid,
+          email: user.email,
+          firstName: firstName,
+          lastName: lastName
+        });
+      }).catch(function(error) {
       that.createNotification("error", error.message, "Registration Error", 4000);
     });
   },
@@ -73,12 +77,9 @@ const App = React.createClass({
   },
   updatePromise: function(error) {
     if(error) {
-      console.log("Error when updating, saving to localStorage");
-      console.log(error);
       this.createNotification("error", error, "Error", 3000);
     }
     else {
-      console.log("Successfully added item");
       this.createNotification("success", "Item was added!", "Success!", 2000);
     }
   },
