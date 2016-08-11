@@ -5,12 +5,9 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 
 import Rebase from "re-base";
 import Firebase from "firebase";
+import Configuration from "../../config";
 
-var config = {
-  apiKey: "3RjI1jSJ9KXAcNP26NB4i6xgjFcXU9SjoqNHIWcC",
-  databaseURL: "https://travel-app-1e574.firebaseio.com/"
-};
-Firebase.initializeApp(config);
+Firebase.initializeApp(Configuration.firebaseConfig);
 var database = Firebase.database();
 
 // Import components
@@ -55,27 +52,11 @@ const App = React.createClass({
   registerUser: function(email, password) {
     var that = this;
     console.log("Register User");
-    // database.createUser({
-    //   email: email,
-    //   password: password
-    // }, function(error, userData) {
-    //   if(error) {
-    //     switch(error.code) {
-    //       case "EMAIL_TAKEN":
-    //         that.createNotification("error", "The email provided is already in use.", "Error Creating User", 3000);
-    //         break;
-    //       case "INVALID_EMAIL":
-    //         that.createNotification("error", "The specified email is not a valid email.", "Error Creating User", 3000);
-    //         break;
-    //       default:
-    //         that.createNotification("error", "An generic error occured when creating a user.", "Error Creating User", 3000);
-    //     }
-    //   }
-    //   else {
-    //     console.log("Added user account with uid: ", userData.uid);
-    //     console.log(userData);
-    //   }
-    // });
+    Firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      console.log("Error when creating user");
+      console.log(error); //error.code error.message
+      that.createNotification("error", error.message, "Registration Error", 4000);
+    });
   },
   addTravelItem: function(travelItem) {
     // Use firebase to add an unique key
@@ -113,6 +94,7 @@ const App = React.createClass({
       var childWithCorrectProps = {};
       switch(pathName) {
         case "/login":
+          childWithCorrectProps = React.cloneElement(child);
           break;
         case "/register":
           childWithCorrectProps = React.cloneElement(child, {
@@ -120,6 +102,7 @@ const App = React.createClass({
           });
           break;
         case "/recovery":
+          childWithCorrectProps = React.cloneElement(child);
           break;
         default:
           childWithCorrectProps = React.cloneElement(child, {
