@@ -58,9 +58,11 @@ const App = React.createClass({
           firstName: firstName,
           lastName: lastName
         });
+
       }).catch(function(error) {
       that.createNotification("error", error.message, "Registration Error", 4000);
     });
+    this.props.router.push("/");
   },
   addTravelItem: function(travelItem) {
     // Use firebase to add an unique key
