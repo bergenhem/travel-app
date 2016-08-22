@@ -52,6 +52,10 @@ body {
   font-size: 14px;
 }
 
+.overallArea input.invalid {
+  background: #f2dede;
+}
+
 .radioButtonArea {
   padding: 0 0 20px 0;
 }

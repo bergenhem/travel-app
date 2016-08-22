@@ -101,7 +101,8 @@ const App = React.createClass({
           break;
         case "/register":
           childWithCorrectProps = React.cloneElement(child, {
-            registerUser: that.registerUser
+            registerUser: that.registerUser,
+            createNotification: that.createNotification
           });
           break;
         case "/recovery":
