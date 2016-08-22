@@ -58,6 +58,7 @@ const App = React.createClass({
           firstName: firstName,
           lastName: lastName
         });
+        // navigate to the main page
         that.props.router.push("/");
       }).catch(function(error) {
       that.createNotification("error", error.message, "Registration Error", 4000);

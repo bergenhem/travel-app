@@ -2,6 +2,7 @@ const Validator = {
   validateInput: function(typeOfValidation, value) {
     var isValid = true;
     var messageToSend = "Everything is fine!";
+
     switch(typeOfValidation)  {
       case "firstName":
         if(/^[A-z]+$/.test(value) === false) { isValid = false; messageToSend = "First Name is invalid!"; };
@@ -20,6 +21,7 @@ const Validator = {
         break;
     }
 
+    // return an object so we can both check if a field is valid, and what the message should be
     var returnObject = {
       isValid: isValid,
       message: messageToSend
