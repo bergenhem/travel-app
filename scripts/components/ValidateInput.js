@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import ValidatorHelper from "./helpers/validation";
 
 const ValidateInput = React.createClass({
   getInitialState: function() {
@@ -14,17 +15,16 @@ const ValidateInput = React.createClass({
   },
   checkIfValid: function(typeOfValidation) {
     var input = this.refs.internalInput.value;
-    var isFormValid = true;
-    if(typeOfValidation === "email") {
-      if(/@progress.com\s*$/.test(input) === false) {
-        isFormValid = false;
-        this.props.createNotification("error", "Email needs to be @progress.com", "Validation Error", 4000);
-      }
-    }
-    this.state.isValid = isFormValid;
+
+    var validationCheck = ValidatorHelper.validateInput(typeOfValidation, input);
+    this.state.isValid = validationCheck.isValid;
     this.setState({
       isValid: this.state.isValid
     });
+
+    if(validationCheck.isValid === false) {
+      this.props.createNotification("error", validationCheck.message, "Validation Error", 4000);
+    }
 
   },
   render() {

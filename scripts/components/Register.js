@@ -23,32 +23,22 @@ const Register = React.createClass({
   },
   // This isn't a great way to do validation, but for simplicities sake we'll just do it this way
   validateForm: function() {
-    var email = this.refs.emailInput.value;
-    var password = this.refs.passwordInput.value;
-    var firstName = this.refs.firstNameInput.value;
-    var lastName = this.refs.lastNameInput.value;
+    var email = this.refs.emailInput;
+    var password = this.refs.passwordInput;
+    var firstName = this.refs.firstNameInput;
+    var lastName = this.refs.lastNameInput;
     var isFormValid = true;
 
-    console.log("new");
-    console.log(this.refs.emailInput);
-    this.refs.emailInput.checkIfValid("email");
+    email.checkIfValid("email");
+    password.checkIfValid("password");
+    firstName.checkIfValid("firstName");
+    lastName.checkIfValid("lastName");
 
-    if(/^[A-z]+$/.test(firstName) === false) {
-      isFormValid = false;
-      this.props.createNotification("error", "First name is invalid", "Validation Error", 4000);
+    if(email.state.isValid === false || password.state.isValid === false ||
+       firstName.state.isValid === false || lastName.state.isValid === false) {
+         isFormValid = false;
     }
-    if(/^[A-z]+$/.test(lastName) === false) {
-      isFormValid = false;
-      this.props.createNotification("error", "Last name is invalid", "Validation Error", 4000);
-    }
-    if(password.length < 8) {
-      isFormValid = false;
-      this.props.createNotification("error", "Password needs to be 8+ characters", "Validation Error", 4000);
-    }
-    if(/@progress.com\s*$/.test(email) === false) {
-      isFormValid = false;
-      this.props.createNotification("error", "Email needs to be @progress.com", "Validation Error", 4000);
-    }
+
     this.state.isValid = isFormValid;
     this.setState({
       isValid: this.state.isValid
@@ -62,9 +52,9 @@ const Register = React.createClass({
         </div>
         <form className="overallContentArea" ref="registerForm" onSubmit={ this.register }>
           <ValidateInput type="text" ref="emailInput" placeholder="Email" createNotification={ this.props. createNotification } />
-          <input type="text" ref="firstNameInput" placeholder="First Name" />
-          <input type="text" ref="lastNameInput" placeholder="Last Name" />
-          <input type="password" ref="passwordInput" placeholder="Password" />
+          <ValidateInput type="text" ref="firstNameInput" placeholder="First Name" createNotification={ this.props. createNotification } />
+          <ValidateInput type="text" ref="lastNameInput" placeholder="Last Name" createNotification={ this.props. createNotification } />
+          <ValidateInput type="password" ref="passwordInput" placeholder="Password" createNotification={ this.props. createNotification } />
           <button>Register</button>
         </form>
       </div>
