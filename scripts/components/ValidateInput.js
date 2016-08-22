@@ -33,6 +33,9 @@ const ValidateInput = React.createClass({
   value: function() {
     return this.refs.internalInput.value;
   },
+  reset: function() {
+    this.refs.internalInput.value = "";
+  },
   render() {
     return (
       <input ref="internalInput" className={ this.state.isValid ? "" : "invalid" } type={ this.props.type } placeholder={ this.props.placeholder } />

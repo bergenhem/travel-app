@@ -18,7 +18,7 @@ const Register = React.createClass({
                              this.refs.firstNameInput.value(),
                              this.refs.lastNameInput.value());
 
-      this.refs.registerForm.reset();
+      this.refs.passwordInput.reset();
     }
   },
   // This isn't a great way to do validation, but for simplicities sake we'll just do it this way
