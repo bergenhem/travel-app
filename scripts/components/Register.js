@@ -13,10 +13,10 @@ const Register = React.createClass({
     this.validateForm();
 
     if(this.state.isValid === true) {
-      this.props.registerUser(this.refs.emailInput.value,
-                             this.refs.passwordInput.value,
-                             this.refs.firstNameInput.value,
-                             this.refs.lastNameInput.value);
+      this.props.registerUser(this.refs.emailInput.value(),
+                             this.refs.passwordInput.value(),
+                             this.refs.firstNameInput.value(),
+                             this.refs.lastNameInput.value());
 
       this.refs.registerForm.reset();
     }
@@ -28,11 +28,27 @@ const Register = React.createClass({
     var firstName = this.refs.firstNameInput;
     var lastName = this.refs.lastNameInput;
     var isFormValid = true;
+    var errorArray = [];
 
-    email.checkIfValid("email");
-    password.checkIfValid("password");
-    firstName.checkIfValid("firstName");
-    lastName.checkIfValid("lastName");
+    var emailCheck = email.checkIfValid("email")
+    if(emailCheck != null) { errorArray.push(emailCheck) };
+
+    var firstNameCheck = firstName.checkIfValid("firstName");
+    if(firstNameCheck != null) { errorArray.push(firstNameCheck) };
+
+    var lastNameCheck = lastName.checkIfValid("lastName");
+    if(lastNameCheck != null) { errorArray.push(lastNameCheck) };
+
+    var passwordCheck = password.checkIfValid("password");
+    if(passwordCheck != null) { errorArray.push(passwordCheck) };
+
+    /*
+      This is a workaround to due to making more than two consecutive calls to createNotification
+      will error out due to similar keys being used. doSetTimeOut is a part of this workaround
+    */
+    for(var i = 0; i < errorArray.length; i++) {
+      this.doSetTimeOut(errorArray[i]);
+    }
 
     if(email.state.isValid === false || password.state.isValid === false ||
        firstName.state.isValid === false || lastName.state.isValid === false) {
@@ -43,6 +59,12 @@ const Register = React.createClass({
     this.setState({
       isValid: this.state.isValid
     });
+  },
+  // This is just here for the notification workaround
+  doSetTimeOut(message) {
+    setTimeout(function() {
+      this.props.createNotification("error", message, "Validation Error", 4000);
+    }.bind(this), 100);
   },
   render() {
     return(

@@ -23,9 +23,15 @@ const ValidateInput = React.createClass({
     });
 
     if(validationCheck.isValid === false) {
-      this.props.createNotification("error", validationCheck.message, "Validation Error", 4000);
+      return validationCheck.message;
+    }
+    else {
+      return null;
     }
 
+  },
+  value: function() {
+    return this.refs.internalInput.value;
   },
   render() {
     return (
