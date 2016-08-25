@@ -3,11 +3,9 @@ import { render } from "react-dom";
 
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 
-import Rebase from "re-base";
 import Firebase from "firebase";
-import Configuration from "../../config";
+import Auth from "./helpers/auth";
 
-Firebase.initializeApp(Configuration.firebaseConfig);
 var database = Firebase.database();
 
 // Import components
@@ -61,7 +59,16 @@ const App = React.createClass({
         // navigate to the main page
         that.props.router.push("/");
       }).catch(function(error) {
-      that.createNotification("error", error.message, "Registration Error", 4000);
+        that.createNotification("error", error.message, "Registration Error", 4000);
+      });
+  },
+  login: function(email, password) {
+    Firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(function(user) {
+      console.log("user is logged in");
+    })
+    .catch(function(error) {
+      console.log("user never logged in");
     });
   },
   addTravelItem: function(travelItem) {
@@ -97,7 +104,9 @@ const App = React.createClass({
       var childWithCorrectProps = {};
       switch(pathName) {
         case "/login":
-          childWithCorrectProps = React.cloneElement(child);
+          childWithCorrectProps = React.cloneElement(child, {
+            login: that.login
+          });
           break;
         case "/register":
           childWithCorrectProps = React.cloneElement(child, {

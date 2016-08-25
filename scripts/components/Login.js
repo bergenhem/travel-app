@@ -4,6 +4,9 @@ import { render } from "react-dom";
 const Login = React.createClass({
   login: function(event) {
     event.preventDefault();
+    var email = this.refs.userInput.value;
+    var password = this.refs.userInput.value;
+    this.props.login(email, password);
     this.refs.loginForm.reset();
   },
   render() {
@@ -13,8 +16,8 @@ const Login = React.createClass({
           <h1>Log in</h1>
         </div>
         <form className="overallContentArea" ref="loginForm" onSubmit={ this.login }>
-          <input type="text" placeholder="Username" />
-          <input type="password" placeholder="Password" />
+          <input type="text" ref="userInput" placeholder="Username" />
+          <input type="password" ref="passwordInput" placeholder="Password" />
           <button>Log in</button>
           <div className="helperLinks">
             <span className="alignLeft">
