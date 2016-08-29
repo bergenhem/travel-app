@@ -7,9 +7,9 @@ const Login = React.createClass({
     event.preventDefault();
 
     var email = this.refs.userInput.value;
-    var password = this.refs.userInput.value;
+    var password = this.refs.passwordInput.value;
 
-    var login = AuthHelper.login(email, password, this.props.createNotification);
+    var login = AuthHelper.login(email, password, this.props.createNotification, this.props.router);
 
     this.refs.loginForm.reset();
   },

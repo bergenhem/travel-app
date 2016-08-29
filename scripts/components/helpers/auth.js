@@ -8,14 +8,13 @@ const AuthHelper = {
   getUser: function() {
     return _currentUser;
   },
-  login: function(email, password, createNotification) {
+  login: function(email, password, createNotification, router) {
     Firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function (user) {
-      console.log("logged in, yo!");
-      console.log(user);
+      router.push("/");
     })
     .catch(function (error) {
-      console.log("Error when signing in");
+      console.log(error);
       createNotification("error", error.message, "Error logging in", 4000);
     });
   },
@@ -25,9 +24,7 @@ const AuthHelper = {
   requireAuth: function(nextState, replace) {
     var user = Firebase.auth().currentUser;
     if(user) {
-      console.log("user is logged in!");
-      console.log(user);
-      _currentUser = user;
+      this._currentUser = user;
     }
     else { // no user is logged in, redirect to login view
       replace({

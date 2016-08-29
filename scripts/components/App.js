@@ -62,15 +62,6 @@ const App = React.createClass({
         that.createNotification("error", error.message, "Registration Error", 4000);
       });
   },
-  login: function(email, password) {
-    Firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(function(user) {
-      console.log("user is logged in");
-    })
-    .catch(function(error) {
-      console.log("user never logged in");
-    });
-  },
   addTravelItem: function(travelItem) {
     // Use firebase to add an unique key
     var newPostKey = database.ref("/travelItems").push().key;
