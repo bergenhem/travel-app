@@ -6,6 +6,7 @@ const Travel = React.createClass({
     return { travelReason: "work" }
   },
   reasonChange: function(event) {
+    console.log("change");
     this.setState({ travelReason: event.target.value });
   },
   changeType: function(event) {
@@ -39,11 +40,11 @@ const Travel = React.createClass({
   // Design for the switch inspired by: http://codepen.io/kylephillips/pen/MYwXqV
   render() {
     return(
-      <div className="overallArea">
-        <div className="overallHeader">
+      <div className="travelArea">
+        <div className="travelHeader">
           <h1>Add Travel</h1>
         </div>
-        <form className="overallContentArea" ref="travelForm" onSubmit={ this.submitTravel }>
+        <form className="travelContentArea" ref="travelForm" onSubmit={ this.submitTravel }>
           <div className="radioButtonArea">
             <div className="switch">
               <div className="travelRadioButton">
@@ -62,7 +63,7 @@ const Travel = React.createClass({
             </div>
           </div>
           {/* This is the personal-related input area */}
-          <div>
+          <div className="dateInputArea">
             <input ref="startDate" id="startDate" type="text" onFocus={ this.changeType } onBlur={ this.changeType } placeholder="Start Date" />
             <input ref="endDate" id="endDate" type="text" onFocus={ this.changeType } onBlur={ this.changeType } placeholder="End Date" />
           </div>
@@ -70,7 +71,7 @@ const Travel = React.createClass({
           <div className={ (this.state.travelReason != "work") ? "hidden" : null }>
             <input ref="companyName" id="companyInput" type="text" placeholder="Company Name"/>
           </div>
-          <button>Add Travel</button>
+          <button className="submitTravelButton">Add Travel</button>
         </form>
       </div>
     );

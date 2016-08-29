@@ -14,7 +14,7 @@ body {
   background-color: rgb(213, 213, 216);
 }
 
-.overallArea {
+.travelArea {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
@@ -24,24 +24,24 @@ body {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.overallHeader {
+.travelHeader {
   color: #FFFFFF;
   height: 50px;
   padding: 0 45px 0 45px;
   background-color: rgb(127, 48, 149);
 }
 
-.overallHeader h1 {
+.travelHeader h1 {
   font-size: 1.5em;
   padding: 10px 0 10px 0;
   text-align: left;
 }
 
-.overallContentArea {
+.travelContentArea {
   padding: 20px 45px 45px 45px;
 }
 
-.overallArea input {
+.travelArea input {
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -50,10 +50,6 @@ body {
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
-}
-
-.overallArea input.invalid {
-  background: #f2dede;
 }
 
 .radioButtonArea {
@@ -118,7 +114,7 @@ body {
   transition: all 200ms ease;
 }
 
-.overallArea button {
+.travelArea button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -132,37 +128,16 @@ body {
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.overallArea button:hover,.overallArea button:active {
+.travelArea button:hover,.travelArea button:active {
   background: rgb(91, 32, 99);
 }
 
-.helperLinks {
-  padding-top: 10px;
+.dateInputArea {
+
 }
 
-.helperLinks a, .helperLinks a:link, .helperLinks a:visited {
-  border: none;
-  text-decoration: inherit;
-  font-style: inherit;
-  font-size: 0.8em;
-  color: rgb(124, 135, 142);
-}
+.submitTravelButton {
 
-.helperLinks a:hover {
- text-decoration: none;
- color: rgb(127, 48, 149);
-}
-
-.helperLinks span {
-  width: 50%;
-  display: inline-block;
-}
-
-.helperLinks span.align-left {
-  text-align: left;
-}
-.helperLinks span.align-right {
-  text-align: right;
 }
 
 .hidden {
