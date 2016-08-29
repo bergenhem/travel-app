@@ -105,7 +105,7 @@ const App = React.createClass({
       switch(pathName) {
         case "/login":
           childWithCorrectProps = React.cloneElement(child, {
-            login: that.login
+            createNotification: that.createNotification
           });
           break;
         case "/register":

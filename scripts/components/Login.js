@@ -1,12 +1,16 @@
 import React from "react";
 import { render } from "react-dom";
+import AuthHelper from "./helpers/auth";
 
 const Login = React.createClass({
   login: function(event) {
     event.preventDefault();
+
     var email = this.refs.userInput.value;
     var password = this.refs.userInput.value;
-    this.props.login(email, password);
+
+    var login = AuthHelper.login(email, password, this.props.createNotification);
+
     this.refs.loginForm.reset();
   },
   render() {
