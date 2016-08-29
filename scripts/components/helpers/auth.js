@@ -14,7 +14,6 @@ const AuthHelper = {
       router.push("/");
     })
     .catch(function (error) {
-      console.log(error);
       createNotification("error", error.message, "Error logging in", 4000);
     });
   },
@@ -32,6 +31,15 @@ const AuthHelper = {
         state: { nextPathname: nextState.location.pathname }
       });
     }
+  },
+  recoverPassword: function(email, createNotification, router) {
+    Firebase.auth().sendPasswordResetEmail(email)
+    .then(function() {
+      router.push("/login");
+    })
+    .catch(function(error) {
+      createNotification("error", error.message, "Error resetting password", 4000);
+    });
   }
 };
 

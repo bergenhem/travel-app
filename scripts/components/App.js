@@ -106,7 +106,9 @@ const App = React.createClass({
           });
           break;
         case "/recovery":
-          childWithCorrectProps = React.cloneElement(child);
+          childWithCorrectProps = React.cloneElement(child, {
+            createNotification: that.createNotification
+          });
           break;
         default:
           childWithCorrectProps = React.cloneElement(child, {
