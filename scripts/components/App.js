@@ -3,14 +3,9 @@ import { render } from "react-dom";
 
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 
-import Rebase from "re-base";
 import Firebase from "firebase";
+import Auth from "./helpers/auth";
 
-var config = {
-  apiKey: "3RjI1jSJ9KXAcNP26NB4i6xgjFcXU9SjoqNHIWcC",
-  databaseURL: "https://travel-app-1e574.firebaseio.com/"
-};
-Firebase.initializeApp(config);
 var database = Firebase.database();
 
 // Import components
@@ -25,17 +20,15 @@ const App = React.createClass({
   componentDidMount: function() {
     var that = this;
     database.ref("/travelItems").once("value", function(dataSnapShot) {
-      console.log("Read data at load");
       var loadedTravelItems = dataSnapShot.val();
       that.setState({
         travelItems: loadedTravelItems
       });
     }, function(error) {
-      console.log("Error retrieving data at load");
-      console.log(error);
       this.createNotification("error", error, "Error", 3000);
     });
   },
+  // Abstraction to create popup notifications of various kinds
   createNotification: function(type, message, title, timeout) {
       switch(type) {
         case "info":
@@ -52,6 +45,23 @@ const App = React.createClass({
           break;
       }
   },
+  registerUser: function(email, password, firstName, lastName) {
+    var that = this;
+    Firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(function(user) { // successfully created a user, now let's update the "user" data item
+        var uid = user.uid;
+        database.ref("/user/" + uid).set({
+          uid: uid,
+          email: user.email,
+          firstName: firstName,
+          lastName: lastName
+        });
+        // navigate to the main page
+        that.props.router.push("/");
+      }).catch(function(error) {
+        that.createNotification("error", error.message, "Registration Error", 4000);
+      });
+  },
   addTravelItem: function(travelItem) {
     // Use firebase to add an unique key
     var newPostKey = database.ref("/travelItems").push().key;
@@ -67,19 +77,49 @@ const App = React.createClass({
   },
   updatePromise: function(error) {
     if(error) {
-      console.log("Error when updating, saving to localStorage");
-      console.log(error);
       this.createNotification("error", error, "Error", 3000);
     }
     else {
-      console.log("Successfully added item");
       this.createNotification("success", "Item was added!", "Success!", 2000);
     }
   },
   render() {
+    var that = this;
+    /*
+      The following allows us to check the child view that needs to be rendered and then applies
+      the proper props to that child. This is to prevent registration-specific functionality to be
+      available in the area where we add travel and vice versa etc.
+    */
+    var childrenWithProps = React.Children.map(this.props.children, function(child) {
+      var pathName = child.props.location.pathname;
+      var childWithCorrectProps = {};
+      switch(pathName) {
+        case "/login":
+          childWithCorrectProps = React.cloneElement(child, {
+            createNotification: that.createNotification
+          });
+          break;
+        case "/register":
+          childWithCorrectProps = React.cloneElement(child, {
+            registerUser: that.registerUser,
+            createNotification: that.createNotification
+          });
+          break;
+        case "/recovery":
+          childWithCorrectProps = React.cloneElement(child, {
+            createNotification: that.createNotification
+          });
+          break;
+        default:
+          childWithCorrectProps = React.cloneElement(child, {
+            addTravelItem: that.addTravelItem
+          });
+      }
+      return childWithCorrectProps
+    });
     return (
       <div>
-        <Travel addTravelItem={ this.addTravelItem } />
+        { childrenWithProps }
         <NotificationContainer />
       </div>
     );
