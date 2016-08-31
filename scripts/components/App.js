@@ -14,15 +14,15 @@ import Travel from "./Travel";
 const App = React.createClass({
   getInitialState: function() {
     return this.state = {
-      travelItems: {}
+      users: {}
     };
   },
   componentDidMount: function() {
     var that = this;
-    database.ref("/travelItems").once("value", function(dataSnapShot) {
+    database.ref("/users").once("value", function(dataSnapShot) {
       var loadedTravelItems = dataSnapShot.val();
       that.setState({
-        travelItems: loadedTravelItems
+        users: loadedTravelItems
       });
     }, function(error) {
       this.createNotification("error", error, "Error", 3000);
@@ -50,7 +50,7 @@ const App = React.createClass({
     Firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function(user) { // successfully created a user, now let's update the "user" data item
         var uid = user.uid;
-        database.ref("/user/" + uid).set({
+        database.ref("/users/" + uid).set({
           uid: uid,
           email: user.email,
           firstName: firstName,
@@ -63,17 +63,19 @@ const App = React.createClass({
       });
   },
   addTravelItem: function(travelItem) {
-    // Use firebase to add an unique key
-    var newPostKey = database.ref("/travelItems").push().key;
-    var newItem = {};
+    var currentLoggedUser = Auth.getUser();
+    var currentUID = currentLoggedUser.uid;
 
-    // Update the temporary item we added to Firebase
-    newItem["/travelItems/" + newPostKey] = travelItem;
-    database.ref().update(newItem, this.updatePromise);
+    var userFromState = this.state.users[currentUID];
+    if(userFromState.travelItems === undefined) {
+      userFromState.travelItems = [];
+    }
+    userFromState.travelItems.push(travelItem);
 
-    // Use the above key to create unique entries in our state
-    this.state.travelItems[newPostKey] = travelItem;
-    this.setState({ travelItems: this.state.travelItems });
+    Firebase.database().ref("/users/" + currentUID).update(userFromState, this.updatePromise);
+
+    this.state.users[currentUID] = userFromState;
+    this.setState({ users: this.state.users });
   },
   updatePromise: function(error) {
     if(error) {

@@ -6,11 +6,13 @@ Firebase.initializeApp(Configuration.firebaseConfig);
 const AuthHelper = {
   _currentUser: {},
   getUser: function() {
-    return _currentUser;
+    return this._currentUser;
   },
   login: function(email, password, createNotification, router) {
+    var that = this;
     Firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function (user) {
+      that._currentUser = user;
       router.push("/");
     })
     .catch(function (error) {
