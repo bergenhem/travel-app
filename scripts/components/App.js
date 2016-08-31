@@ -55,21 +55,29 @@ const App = React.createClass({
           email: user.email,
           firstName: firstName,
           lastName: lastName
+        })
+        .then(function() {
+          database.ref("/users/").once("value", function(snapshot) {
+            that.setState({
+              users: snapshot.val()
+            });
+            Auth.login(email, password, that.createNotification, that.props.router);
+          });
         });
-        // navigate to the main page
-        that.props.router.push("/");
       }).catch(function(error) {
         that.createNotification("error", error.message, "Registration Error", 4000);
       });
   },
   addTravelItem: function(travelItem) {
+    // We need the UID for the user in both state and in Firebase
     var currentLoggedUser = Auth.getUser();
     var currentUID = currentLoggedUser.uid;
 
     var userFromState = this.state.users[currentUID];
-    if(userFromState.travelItems === undefined) {
+    if(userFromState.travelItems === undefined) { // this is just in case this never got added to the item (only applicable to a brand new user)
       userFromState.travelItems = [];
     }
+    // update locally, in Firebase, and finally update our state
     userFromState.travelItems.push(travelItem);
 
     Firebase.database().ref("/users/" + currentUID).update(userFromState, this.updatePromise);
