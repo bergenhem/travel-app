@@ -5,9 +5,9 @@ const TravelItem = React.createClass({
   render() {
     var details = this.props.item;
     return (
-      <div>
+      <li>
         <h1>Name: {details.companyName}</h1>
-      </div>
+      </li>
     )
   }
 });

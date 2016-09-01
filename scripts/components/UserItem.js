@@ -11,12 +11,12 @@ const UserItem = React.createClass({
   render() {
     var details = this.props.details;
     return (
-      <div>
+      <li>
         <h1>Name: {details.firstName}</h1>
         <ul>
           { details.travelItems.map(this.renderTravelItems) }
         </ul>
-      </div>
+      </li>
     )
   }
 });
