@@ -10,6 +10,7 @@ import Recovery from "./components/Recovery";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import Travel from "./components/Travel";
+import List from "./components/List";
 import AuthHelper from "./components/helpers/auth";
 
 /*
@@ -22,6 +23,7 @@ var routes = (
       <Route path="login" component={ Login } />
       <Route path="recovery" component={ Recovery } />
       <Route path="register" component={ Register } />
+      <Route path="list" component={ List } />
     </Route>
     <Route path="*" component={ NotFound } />
   </Router>
