@@ -6,11 +6,9 @@ Firebase.initializeApp(Configuration.firebaseConfig);
 
 Firebase.auth().onAuthStateChanged(function(user) {
   if(user) {
-    console.log("User logged in already");
     Router.push("/");
   }
   else {
-    console.log("User not logged in");
     Router.push("/login");
   }
 });

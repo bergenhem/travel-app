@@ -10,6 +10,7 @@ var database = Firebase.database();
 
 // Import components
 import Travel from "./Travel";
+import Header from "./Header";
 
 const App = React.createClass({
   getInitialState: function() {
@@ -134,6 +135,7 @@ const App = React.createClass({
     });
     return (
       <div>
+        <Header />
         { childrenWithProps }
         <NotificationContainer />
       </div>
