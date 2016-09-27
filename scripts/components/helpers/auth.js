@@ -5,7 +5,9 @@ Firebase.initializeApp(Configuration.firebaseConfig);
 
 const AuthHelper = {
   getUser: function() {
-    var user = Firebase.auth().currentUser();
+    var user = Firebase.auth().currentUser;
+    console.log("user");
+    console.log(user);
     return user;
   },
   login: function(email, password, createNotification, router) {
@@ -18,10 +20,11 @@ const AuthHelper = {
       createNotification("error", error.message, "Error logging in", 4000);
     });
   },
-  logout: function() {
+  logout: function(router) {
     Firebase.auth().signOut()
     .then(function() {
       console.log("User logged out");
+      router.push("/login");
     })
     .catch(function(error) {
       console.log("An error occurred ")

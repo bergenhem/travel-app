@@ -7,15 +7,17 @@ const Header = React.createClass({
 
   },
   logoutClick: function() {
-    AuthHelper.logout();
+    AuthHelper.logout(this.props.router);
   },
   render() {
+    var login;
+    if(AuthHelper.getUser() === null) {
+      login = <li><a href="/login">Log in</a></li>;
+    }
     return(
       <div className="headerMenu">
         <ul>
-          <li>
-            <a href="/login">Log in</a>
-          </li>
+          { login }
           <li>
             <a href="#" onClick={ this.logoutClick }>Log out</a>
           </li>

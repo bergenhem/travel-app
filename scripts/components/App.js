@@ -135,7 +135,7 @@ const App = React.createClass({
     });
     return (
       <div>
-        <Header />
+        <Header router={ this.props.router } />
         { childrenWithProps }
         <NotificationContainer />
       </div>
