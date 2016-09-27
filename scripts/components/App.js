@@ -121,14 +121,14 @@ const App = React.createClass({
             createNotification: that.createNotification
           });
           break;
-        case "/list":
+        case "/add":
           childWithCorrectProps = React.cloneElement(child, {
-            users: that.state.users
+            addTravelItem: that.addTravelItem
           });
           break;
         default:
           childWithCorrectProps = React.cloneElement(child, {
-            addTravelItem: that.addTravelItem
+            users: that.state.users
           });
       }
       return childWithCorrectProps
