@@ -10,19 +10,20 @@ var database = Firebase.database();
 
 // Import components
 import Travel from "./Travel";
+import Header from "./Header";
 
 const App = React.createClass({
   getInitialState: function() {
     return this.state = {
-      travelItems: {}
+      users: {}
     };
   },
   componentDidMount: function() {
     var that = this;
-    database.ref("/travelItems").once("value", function(dataSnapShot) {
+    database.ref("/users").once("value", function(dataSnapShot) {
       var loadedTravelItems = dataSnapShot.val();
       that.setState({
-        travelItems: loadedTravelItems
+        users: loadedTravelItems
       });
     }, function(error) {
       this.createNotification("error", error, "Error", 3000);
@@ -50,30 +51,40 @@ const App = React.createClass({
     Firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function(user) { // successfully created a user, now let's update the "user" data item
         var uid = user.uid;
-        database.ref("/user/" + uid).set({
+        database.ref("/users/" + uid).set({
           uid: uid,
           email: user.email,
           firstName: firstName,
           lastName: lastName
+        })
+        .then(function() {
+          database.ref("/users/").once("value", function(snapshot) {
+            that.setState({
+              users: snapshot.val()
+            });
+            Auth.login(email, password, that.createNotification, that.props.router);
+          });
         });
-        // navigate to the main page
-        that.props.router.push("/");
       }).catch(function(error) {
         that.createNotification("error", error.message, "Registration Error", 4000);
       });
   },
   addTravelItem: function(travelItem) {
-    // Use firebase to add an unique key
-    var newPostKey = database.ref("/travelItems").push().key;
-    var newItem = {};
+    // We need the UID for the user in both state and in Firebase
+    var currentLoggedUser = Auth.getUser();
+    var currentUID = currentLoggedUser.uid;
 
-    // Update the temporary item we added to Firebase
-    newItem["/travelItems/" + newPostKey] = travelItem;
-    database.ref().update(newItem, this.updatePromise);
+    var userFromState = this.state.users[currentUID];
+    if(userFromState.travelItems === undefined) { // this is just in case this never got added to the item (only applicable to a brand new user)
+      userFromState.travelItems = [];
+    }
+    // update locally, in Firebase, and finally update our state
+    userFromState.travelItems.push(travelItem);
 
-    // Use the above key to create unique entries in our state
-    this.state.travelItems[newPostKey] = travelItem;
-    this.setState({ travelItems: this.state.travelItems });
+    Firebase.database().ref("/users/" + currentUID).update(userFromState, this.updatePromise);
+
+    this.state.users[currentUID] = userFromState;
+    this.setState({ users: this.state.users });
   },
   updatePromise: function(error) {
     if(error) {
@@ -110,6 +121,11 @@ const App = React.createClass({
             createNotification: that.createNotification
           });
           break;
+        case "/list":
+          childWithCorrectProps = React.cloneElement(child, {
+            users: that.state.users
+          });
+          break;
         default:
           childWithCorrectProps = React.cloneElement(child, {
             addTravelItem: that.addTravelItem
@@ -119,6 +135,7 @@ const App = React.createClass({
     });
     return (
       <div>
+        <Header router={ this.props.router } />
         { childrenWithProps }
         <NotificationContainer />
       </div>

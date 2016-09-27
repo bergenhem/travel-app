@@ -10,6 +10,7 @@ import Recovery from "./components/Recovery";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import Travel from "./components/Travel";
+import List from "./components/List";
 import AuthHelper from "./components/helpers/auth";
 
 /*
@@ -17,11 +18,12 @@ import AuthHelper from "./components/helpers/auth";
 */
 var routes = (
   <Router history={ createHistory() }>
-    <Route path="/" component={ App } >
-      <IndexRoute component={ Travel } onEnter={ AuthHelper.requireAuth } />
+    <Route path="/" component={ App } onEnter={ AuthHelper.requireAuth } >
+      <IndexRoute component={ Travel } />
       <Route path="login" component={ Login } />
       <Route path="recovery" component={ Recovery } />
       <Route path="register" component={ Register } />
+      <Route path="list" component={ List } />
     </Route>
     <Route path="*" component={ NotFound } />
   </Router>
