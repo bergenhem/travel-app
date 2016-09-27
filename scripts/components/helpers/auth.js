@@ -6,8 +6,6 @@ Firebase.initializeApp(Configuration.firebaseConfig);
 const AuthHelper = {
   getUser: function() {
     var user = Firebase.auth().currentUser;
-    console.log("user");
-    console.log(user);
     return user;
   },
   login: function(email, password, createNotification, router) {
