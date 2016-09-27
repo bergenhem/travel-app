@@ -18,7 +18,7 @@ import AuthHelper from "./components/helpers/auth";
 */
 var routes = (
   <Router history={ createHistory() }>
-    <Route path="/" component={ App } >
+    <Route path="/" component={ App } onEnter={ AuthHelper.requireAuth } >
       <IndexRoute component={ Travel } />
       <Route path="login" component={ Login } />
       <Route path="recovery" component={ Recovery } />
