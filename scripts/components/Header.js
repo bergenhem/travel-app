@@ -17,6 +17,9 @@ const Header = React.createClass({
     return(
       <div className="headerMenu">
         <ul>
+          <li>
+            <a href="/">Travel</a>
+          </li>
           { login }
           <li>
             <a href="#" onClick={ this.logoutClick }>Log out</a>
