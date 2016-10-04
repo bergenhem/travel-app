@@ -10,9 +10,17 @@ const List = React.createClass({
   },
   render() {
     return (
-      <ul>
-        { Object.keys(this.props.users).map(this.renderItem) }
-      </ul>
+      <div className="overallArea">
+        <div className="overallHeader">
+          <h1>Upcoming Travel</h1>
+          <a className="addTravelPlus" href="/add">+</a>
+        </div>
+        <div className="overallContentArea">
+          <ul className="userTravelDisplay">
+            { Object.keys(this.props.users).map(this.renderItem) }
+          </ul>
+        </div>
+      </div>
     )
   }
 });

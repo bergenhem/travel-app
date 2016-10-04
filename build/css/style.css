@@ -68,8 +68,10 @@ body {
 
 .overallHeader h1 {
   font-size: 1.5em;
-  padding: 10px 0 10px 0;
-  text-align: left;
+  text-align: center;
+  margin-top: 0.5em;
+  display: inline;
+  float: left;
 }
 
 .overallContentArea {
@@ -198,6 +200,30 @@ body {
 }
 .helperLinks span.align-right {
   text-align: right;
+}
+
+.userTravelDisplay,
+.userTravelDisplay ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.detailItem {
+  width: 400px;
+  height: 75px;
+  padding: 10px 10px 0 10px;
+  margin-bottom: 10px;
+}
+
+.addTravelPlus {
+  text-decoration: none;
+  display: inline;
+  float: right;
+  font-size: 2em;
+  margin-top: 0.15em;
+  color: white;
 }
 
 .hidden {
