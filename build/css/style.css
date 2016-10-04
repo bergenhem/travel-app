@@ -200,6 +200,21 @@ body {
   text-align: right;
 }
 
+.userTravelDisplay,
+.userTravelDisplay ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.detailItem {
+  width: 400px;
+  height: 75px;
+  padding: 10px 10px 0 10px;
+  margin-bottom: 10px;
+}
+
 .hidden {
   display: none;
 }

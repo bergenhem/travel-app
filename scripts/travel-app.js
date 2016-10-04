@@ -24,7 +24,7 @@ var routes = (
       <Route path="recovery" component={ Recovery } />
       <Route path="register" component={ Register } />
       <Route path="list" component={ List } />
-      <route path="add" component={ Travel } />
+      <Route path="add" component={ Travel } />
     </Route>
     <Route path="*" component={ NotFound } />
   </Router>
