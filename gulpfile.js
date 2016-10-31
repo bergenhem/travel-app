@@ -56,7 +56,7 @@ function handleErrors() {
   this.emit("end"); // Keep gulp from hanging on this task
 }
 
-function buildScript(file, watch) {
+function buildScript(file, watch, prod) {
   var props = {
     entries: ["./scripts/" + file],
     debug : true,
@@ -78,11 +78,19 @@ function buildScript(file, watch) {
       .on("error", handleErrors)
       .pipe(source(file))
       .pipe(gulp.dest("./build/"))
-      // If you also want to uglify it
-      // .pipe(buffer())
-      // .pipe(uglify())
-      // .pipe(rename("app.min.js"))
-      // .pipe(gulp.dest("./build"))
+      .pipe(reload({ stream: true }))
+  }
+
+  function rebundleProd() {
+    var stream = bundler.bundle();
+    return stream
+      .on("error", handleErrors)
+      .pipe(source(file))
+      .pipe(gulp.dest("./build/"))
+      .pipe(buffer())
+      .pipe(uglify())
+      .pipe(rename("app.min.js"))
+      .pipe(gulp.dest("./build"))
       .pipe(reload({ stream: true }))
   }
 
@@ -93,15 +101,24 @@ function buildScript(file, watch) {
   });
 
   // run it once the first time buildScript is called
-  return rebundle();
+  if(prod === true) {
+    return rebundleProd();
+  }
+  else {
+    return rebundle();
+  }
 }
 
 gulp.task("scripts", function() {
-  return buildScript("travel-app.js", false); // this will run once because we set watch to false
+  return buildScript("travel-app.js", false, false); // this will run once because we set watch to false
 });
 
 // run 'scripts' task first, then watch for future changes
 gulp.task("default", ["styles", "scripts", "browser-sync"], function() {
   gulp.watch("css/**/*", ["styles"]); // gulp watch for stylus changes
-  return buildScript("travel-app.js", true); // browserify watch for JS changes
+  return buildScript("travel-app.js", true, false); // browserify watch for JS changes
+});
+
+gulp.task("production", ["styles", "scripts"], function() {
+  return buildScript("travel-app.js", false, true);
 });
