@@ -3,6 +3,15 @@ import { render } from "react-dom";
 import TravelItem from "./TravelItem";
 
 const UserItem = React.createClass({
+  renderContent: function(details) {
+    if(details.travelItems) {
+      return(
+        <ul>
+            { details.travelItems.map(this.renderTravelItems) }
+        </ul>
+      )
+    }
+  },
   renderTravelItems: function(travelItem, index) {
     return (
       <TravelItem key={index} item={ travelItem }/>
@@ -13,9 +22,7 @@ const UserItem = React.createClass({
     return (
       <li>
         <h1>{ details.firstName } { details.lastName }</h1>
-        <ul>
-          { details.travelItems.map(this.renderTravelItems) }
-        </ul>
+        { this.renderContent(details) }
       </li>
     )
   }
