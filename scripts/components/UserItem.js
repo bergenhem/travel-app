@@ -5,20 +5,37 @@ import Moment from "moment";
 
 const UserItem = React.createClass({
   renderTravelSection: function(details) {
-
     if(details.travelItems) {
-      return(
-        <ul>
-            { details.travelItems.map(this.renderTravelItems) }
-        </ul>
-      )
+      var travelItemsToDisplay = details.travelItems.map(this.filterDates)
+                                  .filter(function(item) { //filter all of our undefined items
+                                    return typeof item !== "undefined";
+                                  });
+      if(travelItemsToDisplay.length > 0) {
+        return(
+          <ul>
+              { travelItemsToDisplay.map(this.renderTravelItems) }
+          </ul>
+        )
+      }
+      else {
+        return <span>No upcoming travel</span>;
+      }
     }
     else {
-      return <span>No upcoming travel</span>
+      return <span>No upcoming travel</span>;
+    }
+  },
+  // Quick check if the travel items happened in the past or not
+  filterDates: function(travelItem, index) {
+    if(this.checkDate(travelItem.startDate)) {
+      return travelItem;
+    }
+    else {
+      return undefined;
     }
   },
   checkDate: function(date) {
-    return moment(date).isAfter(moment());
+    return Moment(date).isAfter(Moment());
   },
   renderTravelItems: function(travelItem, index) {
     return (
