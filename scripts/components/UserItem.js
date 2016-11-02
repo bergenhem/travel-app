@@ -27,7 +27,7 @@ const UserItem = React.createClass({
   },
   // Quick check if the travel items happened in the past or not
   filterDates: function(travelItem, index) {
-    if(this.checkDate(travelItem.startDate)) {
+    if(this.checkDate(travelItem.endDate)) {
       return travelItem;
     }
     else {
@@ -35,7 +35,7 @@ const UserItem = React.createClass({
     }
   },
   checkDate: function(date) {
-    return Moment(date).isAfter(Moment());
+    return Moment(date).isSameOrAfter(Moment());
   },
   renderTravelItems: function(travelItem, index) {
     return (

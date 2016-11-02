@@ -3,7 +3,7 @@ import { render } from "react-dom";
 
 const TravelItem = React.createClass({
   // Only show the "company" field if this is work related
-  renderCompanySection: function() {
+  renderCompanySection: function(details) {
     if(this.props.item.type === "Work") {
       return (
         <div className="singleItem">
@@ -34,7 +34,7 @@ const TravelItem = React.createClass({
           <div className="singleItem">
             <strong>Type: </strong><span> { details.type }</span>
           </div>
-          { this.renderCompanySection() }
+          { this.renderCompanySection(details) }
         </div>
       </li>
     )
