@@ -1,9 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
 import TravelItem from "./TravelItem";
+import Moment from "moment";
 
 const UserItem = React.createClass({
-  renderContent: function(details) {
+  renderTravelSection: function(details) {
+
     if(details.travelItems) {
       return(
         <ul>
@@ -11,6 +13,12 @@ const UserItem = React.createClass({
         </ul>
       )
     }
+    else {
+      return <span>No upcoming travel</span>
+    }
+  },
+  checkDate: function(date) {
+    return moment(date).isAfter(moment());
   },
   renderTravelItems: function(travelItem, index) {
     return (
@@ -22,7 +30,7 @@ const UserItem = React.createClass({
     return (
       <li>
         <h1>{ details.firstName } { details.lastName }</h1>
-        { this.renderContent(details) }
+        { this.renderTravelSection(details) }
       </li>
     )
   }
