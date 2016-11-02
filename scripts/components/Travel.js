@@ -3,7 +3,7 @@ import { render } from "react-dom";
 
 const Travel = React.createClass({
   getInitialState: function() {
-    return { travelReason: "work" }
+    return { travelReason: "Work" }
   },
   reasonChange: function(event) {
     this.setState({ travelReason: event.target.value });
@@ -47,18 +47,18 @@ const Travel = React.createClass({
           <div className="radioButtonArea">
             <div className="switch">
               <div className="travelRadioButton">
-                <input id="workOption" type="radio" name="travelType" value="work"
-                  checked={ this.state.travelReason === "work" }
+                <input id="workOption" type="radio" name="travelType" value="Work"
+                  checked={ this.state.travelReason === "Work" }
                   onChange={ this.reasonChange } />
                 <label htmlFor="workOption">Work</label>
               </div>
               <div className="travelRadioButton">
-                <input id="personalOption" type="radio" name="travelType" value="personal"
-                  checked={ this.state.travelReason === "personal" }
+                <input id="personalOption" type="radio" name="travelType" value="Personal"
+                  checked={ this.state.travelReason === "Personal" }
                   onChange={ this.reasonChange } />
                 <label htmlFor="personalOption">Personal</label>
               </div>
-              <span className={ (this.state.travelReason != "work") ? "right" : null } aria-hidden="true"></span>
+              <span className={ (this.state.travelReason != "Work") ? "right" : null } aria-hidden="true"></span>
             </div>
           </div>
           {/* This is the personal-related input area */}
@@ -67,7 +67,7 @@ const Travel = React.createClass({
             <input ref="endDate" id="endDate" type="text" onFocus={ this.changeType } onBlur={ this.changeType } placeholder="End Date" />
           </div>
           {/* This is the work-related input area */}
-          <div className={ (this.state.travelReason != "work") ? "hidden" : null }>
+          <div className={ (this.state.travelReason != "Work") ? "hidden" : null }>
             <input ref="companyName" id="companyInput" type="text" placeholder="Company Name"/>
           </div>
           <button>Add Travel</button>
